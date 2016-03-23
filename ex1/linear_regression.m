@@ -7,8 +7,8 @@ function [f,g] = linear_regression(theta, X,y)
   %   y - The target value for each example.  y(j) is the target for example j.
   %
   
-  m=size(X,2);
-  n=size(X,1);
+  m=size(X,2);%col 400
+  n=size(X,1);%row 14
 
   f=0;
   g=zeros(size(theta));
@@ -22,3 +22,17 @@ function [f,g] = linear_regression(theta, X,y)
   %        computed gradient in 'g'.
   
 %%% YOUR CODE HERE %%%
+  %compute f
+  for i = 1:m
+      f = f + (theta' * X(:,i)-y(i))^2;
+  end
+  
+  f = 1/2*f;
+  
+  %compute gradient
+  for j=1:n
+      for i=1:m
+          g(j) = g(j) + X(j,i)*(theta'*X(:,i)-y(i));
+      end
+  end
+  
